@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twitter Hate Speech Detection</title>
+	<style>
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-top: 50px;
+		}
+
+		.result{
+			padding-top: 10px;
+			text-align: center;
+			font-size: large;
+			font-weight: bold;	
+		}
+
+		.header{
+			padding-top: 10px;
+			text-align: center;
+			font-size: large;
+			font-weight: bold;	
+		}
+		label {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		input[type="text"] {
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+			margin-bottom: 20px;
+			width: 80%;
+		}
+
+		input[type="submit"] {
+			background-color: #1DA1F2;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #0a6197;
+		}
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.container img {
+			max-width: 10%;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		TWITTER HATE SPEECH DETECTION
+	</div>
+	<div class="container">
+		<img src="{{ url_for('static', filename='twitter_logo.png') }}" alt="your image">
+	</div>
+	<form action="{{ url_for('predict')}}" method="POST">
+		<label for="text-input">Enter your text:</label>
+		<input type="text" id="text-input" name="input" placeholder="Type here...">
+		<input type="submit" value="Submit">
+	</form>
+	<div class="result">
+		{{ prediction_result }}
+	</div>
+</body>
+</html>
