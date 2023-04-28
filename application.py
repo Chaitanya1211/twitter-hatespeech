@@ -1,40 +1,4 @@
 from flask import Flask, render_template, request
-# import pickle
-# from sklearn.feature_extraction.text import CountVectorizer
-# import numpy as np
-# import joblib
-
-# app = Flask(__name__)
-# model = joblib.load('model.pkl')
-# cv = joblib.load('vectorizer.pkl')
-
-
-# @app.route("/")
-# def Home():
-#     return render_template("index.html")
-
-
-# @app.route("/predict", methods=["POST"])
-# def predict():
-
-#     text_input = request.form['input']
-#     df = cv.transform([text_input]).toarray()
-
-#     # Pass the text input to your pkl model to get a prediction
-#     y_pred = model.predict(df)
-#     if y_pred[0] == 0:
-#         prediction = 'Not hate speech'
-#     else:
-#         prediction = 'Hate speech'
-# #         # Return the prediction as a string to the user
-#     return f"The predicted label for is {prediction}."
-
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
-
-
-from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
@@ -46,7 +10,7 @@ import string
 import json
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 # download the NLTK stopwords
 nltk.download('stopwords')
@@ -83,12 +47,12 @@ clf.fit(x, y)
 # define the Flask routes
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def index():
     return render_template("index.html")
 
 
-@app.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST'])
 def predict():
     data = request.form['input']
     test_data = data[0]
@@ -106,4 +70,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
